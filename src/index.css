@@ -1,0 +1,391 @@
+@import 'tailwindcss';
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+:root {
+  --bg: #fbfaf7;
+  --surface: #ffffff;
+  --sunken: #f4f2ec;
+  --line: #e6e2d8;
+  --fg: #1c1b18;
+  --muted: #68645b;
+  --faint: #9c978c;
+  --accent: #0d7a5f;
+  --accent-soft: #e2f1eb;
+  --accent-fg: #ffffff;
+  --warn: #a15c07;
+  --warn-soft: #fbf0d9;
+  --danger: #b3382c;
+  --danger-soft: #fbe9e6;
+  --info: #2b5fb3;
+  --info-soft: #e6eefb;
+
+  --code-bg: #f6f4ee;
+  --tok-keyword: #a3296b;
+  --tok-string: #1f7a4d;
+  --tok-number: #a15c07;
+  --tok-comment: #8d887c;
+  --tok-func: #2b5fb3;
+  --tok-builtin: #7b4bc2;
+
+  color-scheme: light;
+}
+
+.dark {
+  --bg: #111210;
+  --surface: #191b18;
+  --sunken: #0b0c0a;
+  --line: #2a2d28;
+  --fg: #ecebe6;
+  --muted: #a09e95;
+  --faint: #6e6d66;
+  --accent: #4fd1a5;
+  --accent-soft: #14302a;
+  --accent-fg: #06261c;
+  --warn: #e8b04b;
+  --warn-soft: #33270f;
+  --danger: #f08a7c;
+  --danger-soft: #381a16;
+  --info: #7fb0f5;
+  --info-soft: #14233b;
+
+  --code-bg: #161815;
+  --tok-keyword: #f08fc0;
+  --tok-string: #8fd9a8;
+  --tok-number: #e8b04b;
+  --tok-comment: #74736b;
+  --tok-func: #7fb0f5;
+  --tok-builtin: #c3a2f5;
+
+  color-scheme: dark;
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-sunken: var(--sunken);
+  --color-line: var(--line);
+  --color-fg: var(--fg);
+  --color-muted: var(--muted);
+  --color-faint: var(--faint);
+  --color-accent: var(--accent);
+  --color-accent-soft: var(--accent-soft);
+  --color-accent-fg: var(--accent-fg);
+  --color-warn: var(--warn);
+  --color-warn-soft: var(--warn-soft);
+  --color-danger: var(--danger);
+  --color-danger-soft: var(--danger-soft);
+  --color-info: var(--info);
+  --color-info-soft: var(--info-soft);
+  --color-code: var(--code-bg);
+
+  --font-sans: 'Inter Variable', ui-sans-serif, system-ui, sans-serif;
+  --font-serif: 'Newsreader Variable', ui-serif, Georgia, serif;
+  --font-mono: 'JetBrains Mono Variable', ui-monospace, SFMono-Regular, Menlo, monospace;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 5rem;
+}
+
+body {
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-sans);
+  font-feature-settings: 'cv11', 'ss01';
+  -webkit-font-smoothing: antialiased;
+  transition:
+    background-color 0.2s,
+    color 0.2s;
+}
+
+::selection {
+  background: color-mix(in srgb, var(--accent) 28%, transparent);
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+button {
+  cursor: pointer;
+}
+
+.thin-scroll {
+  scrollbar-width: thin;
+  scrollbar-color: var(--line) transparent;
+}
+
+/* ---------- lesson prose ---------- */
+
+.prose {
+  font-size: 1.0625rem;
+  line-height: 1.75;
+  color: var(--fg);
+}
+
+.prose > * + * {
+  margin-top: 1.25rem;
+}
+
+.prose h2 {
+  font-family: var(--font-serif);
+  font-size: 1.75rem;
+  line-height: 1.25;
+  font-weight: 560;
+  letter-spacing: -0.01em;
+  margin-top: 3rem;
+  padding-top: 1.75rem;
+  border-top: 1px solid var(--line);
+}
+
+.prose h3 {
+  font-size: 1.125rem;
+  font-weight: 650;
+  margin-top: 2.25rem;
+}
+
+.prose h2 + *,
+.prose h3 + * {
+  margin-top: 0.85rem;
+}
+
+.prose a {
+  color: var(--accent);
+  text-decoration: underline;
+  text-decoration-color: color-mix(in srgb, var(--accent) 40%, transparent);
+  text-underline-offset: 3px;
+}
+
+.prose a:hover {
+  text-decoration-color: var(--accent);
+}
+
+.prose strong {
+  font-weight: 650;
+}
+
+.prose ul,
+.prose ol {
+  padding-left: 1.4rem;
+}
+
+.prose ul {
+  list-style: disc;
+}
+
+.prose ol {
+  list-style: decimal;
+}
+
+.prose li + li {
+  margin-top: 0.4rem;
+}
+
+.prose li::marker {
+  color: var(--faint);
+}
+
+.prose :not(pre) > code {
+  font-family: var(--font-mono);
+  font-size: 0.86em;
+  background: var(--sunken);
+  border: 1px solid var(--line);
+  border-radius: 5px;
+  padding: 0.1em 0.35em;
+  white-space: nowrap;
+}
+
+.prose hr {
+  border-color: var(--line);
+  margin: 2.5rem 0;
+}
+
+.prose .table-wrap {
+  overflow-x: auto;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+}
+
+.prose table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+}
+
+.prose th {
+  text-align: left;
+  font-weight: 600;
+  font-size: 0.8rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--muted);
+  background: var(--sunken);
+}
+
+.prose th,
+.prose td {
+  padding: 0.6rem 0.9rem;
+  border-bottom: 1px solid var(--line);
+  vertical-align: top;
+}
+
+.prose tr:last-child td {
+  border-bottom: 0;
+}
+
+.prose blockquote:not(.callout) {
+  border-left: 3px solid var(--line);
+  padding-left: 1rem;
+  color: var(--muted);
+  font-style: italic;
+}
+
+/* callouts: > [!NOTE] / [!TIP] / [!WARNING] / [!KEY] */
+.callout {
+  --c: var(--info);
+  --c-soft: var(--info-soft);
+  background: var(--c-soft);
+  border-radius: 10px;
+  padding: 0.9rem 1.1rem;
+  font-size: 0.98rem;
+  line-height: 1.65;
+}
+
+.callout::before {
+  content: attr(data-label);
+  display: block;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--c);
+  margin-bottom: 0.25rem;
+}
+
+.callout > * + * {
+  margin-top: 0.6rem;
+}
+
+.callout[data-callout='tip'],
+.callout[data-callout='key'] {
+  --c: var(--accent);
+  --c-soft: var(--accent-soft);
+}
+
+.callout[data-callout='warning'] {
+  --c: var(--warn);
+  --c-soft: var(--warn-soft);
+}
+
+.callout :not(pre) > code {
+  background: color-mix(in srgb, var(--surface) 60%, transparent);
+}
+
+/* exercises: <details> solutions */
+.prose details {
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--surface);
+  overflow: hidden;
+}
+
+.prose details > summary {
+  cursor: pointer;
+  padding: 0.6rem 1rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--accent);
+  user-select: none;
+}
+
+.prose details[open] > summary {
+  border-bottom: 1px solid var(--line);
+}
+
+.prose details > :not(summary) {
+  margin: 1rem;
+}
+
+/* math */
+.prose .katex-display {
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: 0.5rem 0;
+}
+
+/* ---------- syntax highlighting ---------- */
+
+.hljs-keyword,
+.hljs-literal,
+.hljs-meta,
+.hljs-selector-tag {
+  color: var(--tok-keyword);
+}
+
+.hljs-string,
+.hljs-regexp,
+.hljs-addition {
+  color: var(--tok-string);
+}
+
+.hljs-number,
+.hljs-attr,
+.hljs-attribute {
+  color: var(--tok-number);
+}
+
+.hljs-comment,
+.hljs-quote {
+  color: var(--tok-comment);
+  font-style: italic;
+}
+
+.hljs-title,
+.hljs-section,
+.hljs-name {
+  color: var(--tok-func);
+}
+
+.hljs-built_in,
+.hljs-type,
+.hljs-params,
+.hljs-symbol,
+.hljs-variable {
+  color: var(--tok-builtin);
+}
+
+.hljs-params {
+  color: inherit;
+}
+
+.hljs-deletion {
+  color: var(--danger);
+}
+
+/* mermaid */
+.mermaid-figure svg {
+  max-width: 100%;
+  height: auto;
+}
+
+/* show operators like >= and != exactly as typed */
+code,
+pre,
+kbd {
+  font-variant-ligatures: none;
+}
+
+/* lesson figures (e.g. charts rendered for the data-visualization module) */
+.prose img {
+  max-width: 100%;
+  height: auto;
+  margin-left: auto;
+  margin-right: auto;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: #ffffff;
+}
